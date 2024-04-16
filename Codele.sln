@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codele", "Codele\Codele.csproj", "{15F5599A-C739-4081-A92B-17959E64474C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeleLogic", "..\ljnlib\CodeleLogic\CodeleLogic.csproj", "{291057C1-1FAC-4BCF-8117-2A822B2EBCA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15F5599A-C739-4081-A92B-17959E64474C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F5599A-C739-4081-A92B-17959E64474C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F5599A-C739-4081-A92B-17959E64474C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F5599A-C739-4081-A92B-17959E64474C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{291057C1-1FAC-4BCF-8117-2A822B2EBCA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{291057C1-1FAC-4BCF-8117-2A822B2EBCA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{291057C1-1FAC-4BCF-8117-2A822B2EBCA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{291057C1-1FAC-4BCF-8117-2A822B2EBCA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
