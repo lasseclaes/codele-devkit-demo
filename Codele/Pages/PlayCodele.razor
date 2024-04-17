@@ -3,7 +3,7 @@
 @using CodeleLogic
 
 <h3>Play Codele</h3>
-<p>Guess the 5 letter, coding-related word in 5 tries or less!</p> 
+<p>Guess the 5 letter, coding-related word in 5 tries or less!</p>
 
 <br>
 
@@ -33,7 +33,7 @@
 
 <!-- input box for the player to type and submit a guess -->
 <input placeholder="Type your guess" @bind="newGuess" />
-<button>Submit</button>
+<button @onclick="SubmitGuess">Submit</button>
 
 <!-- display message if guess is not 5 characters long -->
 @if (displayGuessSizeMsg == true) {
@@ -50,10 +50,10 @@
                     <h4 class="modal-title">@gameStatusMessage</h4>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Correct Answer: </strong> @correctGuess</p>
+                    <p><strong>Correct Answer: </strong> @theCorrectAnswer</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">New Game?</button>
+                    <button type="button" class="btn btn-success" @onclick="StartNewGame">New Game?</button>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
     private string[]? answers;
 
     // the answer for the current game
-    private string? correctGuess;
+    private string? theCorrectAnswer;
 
     // # of tries the player has to guess the word
     private int attempts;
@@ -93,11 +93,54 @@
         attempts = 1;
         answers = await Http.GetFromJsonAsync<string[]>("sample-data/codele-word-library.json");
         Random randomGenerator = new Random();
-        correctGuess = answers[randomGenerator.Next(0, answers.Length)];
+        theCorrectAnswer = answers[randomGenerator.Next(0, answers.Length)];
     }
 
     // Close the game status modal
     private void ModalClose() {
         showModal = false;
-    } 
+    }
+
+    private void SubmitGuess()
+    {
+        if(!string.IsNullOrEmpty(newGuess)) {
+            if (newGuess.Length != 5) {
+                displayGuessSizeMsg = true;
+            }
+            else {
+                displayGuessSizeMsg = false;
+                Guess guess = new Guess(newGuess);
+
+                if (attempts < 5){
+                    guess.GetGuessStatuses(theCorrectAnswer);
+
+                    if (guess.IsWinningGuess(theCorrectAnswer)){
+                        showModal = true;
+                        gameStatusMessage = "Congratulations! You guessed the word!";
+                    }
+                    else {
+                        attempts++;
+                    }
+                }
+                else{
+                    showModal = true;
+                    gameStatusMessage = "You lost!";
+                }
+                guesses.Add(guess);
+                newGuess = string.Empty;
+            }
+        }
+        else{
+            displayGuessSizeMsg = true;
+        }
+    }
+    private void StartNewGame()
+    {
+        guesses.Clear();
+        attempts = 1;
+        Random randomGenerator = new Random();
+        theCorrectAnswer = answers[randomGenerator.Next(0, answers.Length)];
+        showModal = false;
+        newGuess = string.Empty;
+    }
 }
